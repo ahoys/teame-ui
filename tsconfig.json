@@ -6,9 +6,14 @@
     "baseUrl": ".",
     "moduleResolution": "node",
     "jsx": "react",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "components/*": [
         "src/components/*"
+      ],
+      "dist/*": [
+        "dist/*"
       ]
     }
   },

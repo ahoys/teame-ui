@@ -6,7 +6,7 @@
   "author": "Ari Höysniemi <ari.hoysniemi@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_ENV=development webpack --progress --config webpack/config.prod.client.js"
+    "build": "cross-env NODE_ENV=development webpack --progress --config webpack/config.prod.client.js && webpack --progress --config webpack/config.prod.server.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.0",
@@ -31,7 +31,10 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
+    "express": "^4.16.4",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.6.3",
+    "react-universal-component": "^3.0.3",
+    "webpack-flush-chunks": "^2.0.3"
   }
 }
