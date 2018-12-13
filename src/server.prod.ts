@@ -2,12 +2,12 @@ import express from 'express';
 import clientStats from 'dist/stats.json';
 import renderer from './renderer';
 
-const app = express();
+const server = express();
 
-app.use(express.static('dist'));
+server.use(express.static('dist'));
 
-app.use(renderer({ clientStats }));
+server.use(renderer({ clientStats }));
 
-app.listen(3000, () => {
+server.listen(3000, () => {
   console.log(`Production server is listening on port 3000.`);
 });
