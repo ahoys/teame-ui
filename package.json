@@ -37,6 +37,8 @@
   "dependencies": {
     "@emotion/core": "^10.0.4",
     "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.0.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-universal-component": "^3.0.3",
