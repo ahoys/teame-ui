@@ -11,7 +11,7 @@ A small proto UI for Teame backend.
 2. Install Yarn.
 3. Clone this repository (git clone https://github.com/ahoys/teame-ui.git).
 4. Run command "yarn" for the directory. This will install dependencies.
-5. Open VS Code and install extensions: ESLint & Prettier.
+5. Open VS Code and install extensions: ESLint & Prettier & GraphQL.
 6. (optional) Install graphql-cli "yarn global graphql-cli".
 7. (optional) Download newest graphql schema "graphql get-schema --project teame".
 
