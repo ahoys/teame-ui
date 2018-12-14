@@ -2,7 +2,7 @@
 A small proto UI for Teame backend.
 
 ### Requirements
-- [Node >= 10](https://nodejs.org/en/)
+- [Node >= v.10](https://nodejs.org/en/)
 - [Yarn >= v.1.12](https://yarnpkg.com/en/docs/install)
 - [Visual Studio Code](https://code.visualstudio.com/download)
 - Recommended VS code extensions: ESLint & Prettier & GraphQL.
