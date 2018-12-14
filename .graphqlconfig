@@ -4,7 +4,7 @@
       "schemaPath": "src/schema.graphql",
       "extensions": {
         "endpoints": {
-          "default": "http://localhost:8080"
+          "default": "http://localhost:8080/"
         }
       }
     }
