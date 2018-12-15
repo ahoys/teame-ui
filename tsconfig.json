@@ -15,7 +15,12 @@
       "dist/*": [
         "dist/*"
       ]
-    }
+    },
+    "plugins": [
+      {
+        "name": "typescript-tslint-plugin"
+      }
+    ]
   },
   "include": [
     "src/**/*"

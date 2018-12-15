@@ -1,5 +1,5 @@
-import express from 'express';
 import clientStats from 'dist/stats.json';
+import express from 'express';
 import renderer from './renderer';
 
 const server = express();

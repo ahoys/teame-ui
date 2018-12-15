@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress --config webpack/config.prod.client.js && webpack --progress --config webpack/config.prod.server.js",
-    "start": "cross-env NODE_ENV=development node src/server.dev.js"
+    "start": "cross-env NODE_ENV=development node src/server.dev.js",
+    "lint": "./node_modules/.bin/tslint --project ./ ./src/**",
+    "lint:fix": "./node_modules/.bin/tslint --project ./ --fix ./src/**"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.0",
@@ -20,15 +22,14 @@
     "babel-plugin-emotion": "^10.0.4",
     "clean-webpack-plugin": "^1.0.0",
     "cross-env": "^5.2.0",
-    "eslint": "^5.10.0",
-    "eslint-config-prettier": "^3.3.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-prettier": "^3.0.0",
-    "eslint-plugin-react": "^7.11.1",
-    "eslint-plugin-typescript": "^0.14.0",
     "prettier": "^1.15.3",
     "stats-webpack-plugin": "^0.7.0",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.2.2",
+    "typescript-tslint-plugin": "^0.2.1",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-middleware": "^3.4.0",

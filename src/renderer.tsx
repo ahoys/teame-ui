@@ -1,19 +1,18 @@
+import App from 'components/App';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import App from 'components/App';
 import flushChunks from 'webpack-flush-chunks';
+
 import { clearChunks, flushChunkNames } from 'react-universal-component/server';
 
 interface IContext {
-  status?: number,
-  url?: string,
+  status?: number;
+  url?: string;
 }
 
 export default ({ clientStats }) => (req, res, next) => {
   const context: IContext = {};
-  const client = ReactDOMServer.renderToString(
-    <App />
-  );
+  const client = ReactDOMServer.renderToString(<App />);
   // Code splitting.
   clearChunks();
   const { js } = flushChunks(clientStats, {

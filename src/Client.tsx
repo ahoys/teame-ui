@@ -1,8 +1,5 @@
+import App from 'components/App';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from 'components/App';
 
-ReactDOM.hydrate(
-  <App />,
-  document.getElementById('client')
-);
+ReactDOM.hydrate(<App />, document.getElementById('client'));
