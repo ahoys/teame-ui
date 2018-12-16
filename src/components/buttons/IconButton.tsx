@@ -5,7 +5,7 @@ import Icon from 'react-icons';
 
 jsx;
 
-export default ({ icon, str }) => (
+export default ({ icon, str, handleClick }) => (
   <div
     css={{
       alignItems: 'center',
@@ -15,6 +15,7 @@ export default ({ icon, str }) => (
         marginRight: '8px',
       },
     }}
+    onClick={handleClick}
   >
     {React.createElement(icon)}
     <span>{str}</span>

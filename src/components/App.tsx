@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 jsx;
 
-export const notInSessionLayout = (
+export const notInSessionLayout = getSession => (
   <div
     css={{
       alignItems: 'center',
@@ -35,7 +35,7 @@ export const notInSessionLayout = (
       <section>
         <TextInput />
         <TextInput />
-        <IconButton icon={FiLogIn} str={'Sign in'} />
+        <IconButton icon={FiLogIn} str={'Sign in'} handleClick={getSession} />
       </section>
     </div>
   </div>
@@ -55,17 +55,33 @@ export const inSessionLayout = (
       width: '100vw',
     }}
   >
-    Hello!!
+    You just used Redux-stores! That's cool peanuts.
   </div>
 );
 
-export default ({ inSession }) =>
-  inSession ? inSessionLayout : notInSessionLayout;
+export const App = ({ inSession, getSession }) =>
+  inSession ? inSessionLayout : notInSessionLayout(getSession);
 
 export interface IProps {
   inSession: boolean;
 }
 
 export const mapStateToProps = (state: any): IProps => ({
-  inSession: state.getIn(['session', 'username']),
+  inSession: state.getIn(['session', 'token']) !== '',
 });
+
+export const mapDispatchToProps = dispatch => ({
+  getSession: () =>
+    dispatch({
+      payload: {
+        token: 'JustAnExampleToken',
+        username: 'Mr. Example',
+      },
+      type: 'RECEIVE_SESSION',
+    }),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
