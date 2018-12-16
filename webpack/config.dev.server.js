@@ -24,8 +24,10 @@ module.exports = {
   },
   resolve: {
     alias: {
+      actions: `${src}/components`,
       components: `${src}/components`,
       dist,
+      reducers: `${src}/reducers`,
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     modules: ['node_modules'],

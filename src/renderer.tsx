@@ -1,18 +1,27 @@
 import App from 'components/App';
+import { Map } from 'immutable';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import flushChunks from 'webpack-flush-chunks';
-
+import { Provider } from 'react-redux';
 import { clearChunks, flushChunkNames } from 'react-universal-component/server';
+import configureStore from 'reducers/configureStore';
+import serialize from 'serialize-javascript';
+import flushChunks from 'webpack-flush-chunks';
 
 interface IContext {
   status?: number;
   url?: string;
 }
 
+const store = configureStore(Map({}));
+
 export default ({ clientStats }) => (req, res, next) => {
   const context: IContext = {};
-  const client = ReactDOMServer.renderToString(<App />);
+  const client = ReactDOMServer.renderToString(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
   // Code splitting.
   clearChunks();
   const { js } = flushChunks(clientStats, {
@@ -39,6 +48,9 @@ export default ({ clientStats }) => (req, res, next) => {
       </head>
       <body>
         <div id="client">${client}</div>
+        <script type='text/javascript'>window.REDUX_DATA = ${serialize(
+          store.getState()
+        )}</script>
         ${js}
       </body>
     </html>

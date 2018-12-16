@@ -9,11 +9,17 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
+      "actions/*": [
+        "src/actions/*"
+      ],
       "components/*": [
         "src/components/*"
       ],
       "dist/*": [
         "dist/*"
+      ],
+      "reducers/*": [
+        "src/reducers/*"
       ]
     },
     "plugins": [
