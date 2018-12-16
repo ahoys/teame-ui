@@ -42,6 +42,7 @@
     "graphql": "^14.0.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-icons": "^3.2.2",
     "react-universal-component": "^3.0.3",
     "webpack-flush-chunks": "^2.0.3"
   }
