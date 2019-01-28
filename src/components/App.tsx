@@ -1,13 +1,8 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import IconButton from 'components/buttons/IconButton';
-import TextInput from 'components/inputs/TextInput';
-import React from 'react';
-import { FiLogIn } from 'react-icons/fi';
-import { connect } from 'react-redux';
-import fetch from 'node-fetch';
-import base64 from 'base-64';
 import Login from 'containers/Login';
+import React from 'react';
+import { connect } from 'react-redux';
 
 jsx;
 
@@ -16,10 +11,10 @@ export const inSessionLayout = ({ token }) => (
     css={{
       alignItems: 'center',
       display: 'flex',
+      flexDirection: 'column',
       fontSize: '1rem',
       height: '100vh',
       justifyContent: 'center',
-      flexDirection: 'column',
       svg: {
         marginLeft: '8px',
       },
@@ -31,57 +26,20 @@ export const inSessionLayout = ({ token }) => (
   </div>
 );
 
-export const App = ({ inSession, token, getSession, getGraphQL }) =>
+export const App = ({ inSession, token }) =>
   inSession ? inSessionLayout({ token }) : <Login />;
 
-export interface IProps {
+export interface IApp {
   inSession: boolean;
+  token: string;
 }
 
-export const mapStateToProps = (state: any): IProps => ({
+export const mapStateToProps = (state: any): IApp => ({
   inSession: state.getIn(['session', 'token']) !== '',
   token: state.getIn(['session', 'token']),
 });
 
-export const mapDispatchToProps = dispatch => ({
-  getSession: () => {
-    const headers = new Headers(
-      {
-        'Authorization': 'Basic ' + base64.encode('example1:example1')
-      }
-    );
-    fetch('/protected/route/basic', {
-      method: 'GET',
-      headers,
-      mode: 'no-cors',
-    })
-    .then(res => res.json())
-    .then(res => {
-      dispatch({
-        payload: {
-          token: res.teameToken,
-          username: 'example1',
-        },
-        type: 'RECEIVE_SESSION',
-      });
-    });
-  },
-  getGraphQL: () => {
-    const query = '{ users { password }}';
-    fetch('/graphql', {
-      method: 'POST',
-      body: JSON.stringify({ query }),
-      // ContentType: 'application/json',
-      mode: 'no-cors',
-    })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
-});
+export const mapDispatchToProps = () => ({});
 
 export default connect(
   mapStateToProps,

@@ -5,8 +5,6 @@ import TextInput from 'components/inputs/TextInput';
 import React from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { connect } from 'react-redux';
-import fetch from 'node-fetch';
-import base64 from 'base-64';
 import request from 'superagent';
 
 jsx;
@@ -79,41 +77,35 @@ const Login = class Login extends React.Component {
       </div>
     );
   }
+};
+
+export interface ILogin {
+  getSession: (username: string, password: string) => void;
 }
 
-export const mapStateToProps = (state: any): IProps => ({});
+export const mapStateToProps = (state: any): any => ({});
 
-export const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = (dispatch): ILogin => ({
   getSession: (username, password) => {
-    console.log(username, password);
     request
-      .get(`/login?username=${username}&password=${password}`)
+      .get('/login')
+      .auth(username, password)
       .end((err, res) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log('success');
-          console.log(res.body);
+        if (
+          !err &&
+          res.status === 200 &&
+          res.body &&
+          typeof res.body.token === 'string'
+        ) {
+          dispatch({
+            payload: {
+              token: res.body.token,
+              username,
+            },
+            type: 'RECEIVE_SESSION',
+          });
         }
-      })
-
-    // fetch('/login', {
-    //   method: 'POST',
-    //   body: {
-    //     Authorization: 'Basic ' + base64.encode(`${username}:${password}`)
-    //   },
-    //   mode: 'no-cors',
-    // })
-    // .then(res => res.json())
-    // .then(res => {
-    //   dispatch({
-    //     payload: {
-    //       token: res.teameToken,
-    //       username: 'example1',
-    //     },
-    //     type: 'RECEIVE_SESSION',
-    //   });
-    // });
+      });
   },
 });
 
