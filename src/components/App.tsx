@@ -5,10 +5,11 @@ import TextInput from 'components/inputs/TextInput';
 import React from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { connect } from 'react-redux';
+import fetch from 'node-fetch';
 
 jsx;
 
-export const notInSessionLayout = getSession => (
+export const notInSessionLayout = (getSession, getGraphQL) => (
   <div
     css={{
       alignItems: 'center',
@@ -36,6 +37,7 @@ export const notInSessionLayout = getSession => (
         <TextInput />
         <TextInput />
         <IconButton icon={FiLogIn} str={'Sign in'} handleClick={getSession} />
+        <IconButton icon={FiLogIn} str={'GraphQL'} handleClick={getGraphQL} />
       </section>
     </div>
   </div>
@@ -59,8 +61,8 @@ export const inSessionLayout = (
   </div>
 );
 
-export const App = ({ inSession, getSession }) =>
-  inSession ? inSessionLayout : notInSessionLayout(getSession);
+export const App = ({ inSession, getSession, getGraphQL }) =>
+  inSession ? inSessionLayout : notInSessionLayout(getSession, getGraphQL);
 
 export interface IProps {
   inSession: boolean;
@@ -79,6 +81,21 @@ export const mapDispatchToProps = dispatch => ({
       },
       type: 'RECEIVE_SESSION',
     }),
+  getGraphQL: () => {
+    const query = '{ users { password }}';
+    fetch('http://localhost:8080/graphql', {
+      method: 'POST',
+      body: JSON.stringify({ query }),
+      // ContentType: 'application/json',
+      mode: 'no-cors',
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
 });
 
 export default connect(
