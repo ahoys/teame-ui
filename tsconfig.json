@@ -15,6 +15,9 @@
       "components/*": [
         "src/components/*"
       ],
+      "containers/*": [
+        "src/containers/*"
+      ],
       "dist/*": [
         "dist/*"
       ],

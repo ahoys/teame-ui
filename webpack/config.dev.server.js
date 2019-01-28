@@ -26,6 +26,7 @@ module.exports = {
     alias: {
       actions: `${src}/components`,
       components: `${src}/components`,
+      containers: `${src}/containers`,
       dist,
       reducers: `${src}/reducers`,
     },

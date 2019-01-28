@@ -7,10 +7,11 @@ import { FiLogIn } from 'react-icons/fi';
 import { connect } from 'react-redux';
 import fetch from 'node-fetch';
 import base64 from 'base-64';
+import Login from 'containers/Login';
 
 jsx;
 
-export const notInSessionLayout = (getSession, getGraphQL) => (
+export const inSessionLayout = ({ token }) => (
   <div
     css={{
       alignItems: 'center',
@@ -18,52 +19,20 @@ export const notInSessionLayout = (getSession, getGraphQL) => (
       fontSize: '1rem',
       height: '100vh',
       justifyContent: 'center',
+      flexDirection: 'column',
       svg: {
         marginLeft: '8px',
       },
       width: '100vw',
     }}
   >
-    <div
-      css={{
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      <section>
-        <h1>Teame</h1>
-      </section>
-      <section>You have not logged in. Maybe you'd like to?</section>
-      <section>
-        <TextInput />
-        <TextInput />
-        <IconButton icon={FiLogIn} str={'Sign in'} handleClick={getSession} />
-        <IconButton icon={FiLogIn} str={'GraphQL'} handleClick={getGraphQL} />
-      </section>
-    </div>
+    <p>You just used Redux-stores! That's cool peanuts.</p>
+    <p>Your token is {token}</p>
   </div>
 );
 
-export const inSessionLayout = (
-  <div
-    css={{
-      alignItems: 'center',
-      display: 'flex',
-      fontSize: '1rem',
-      height: '100vh',
-      justifyContent: 'center',
-      svg: {
-        marginLeft: '8px',
-      },
-      width: '100vw',
-    }}
-  >
-    You just used Redux-stores! That's cool peanuts.
-  </div>
-);
-
-export const App = ({ inSession, getSession, getGraphQL }) =>
-  inSession ? inSessionLayout : notInSessionLayout(getSession, getGraphQL);
+export const App = ({ inSession, token, getSession, getGraphQL }) =>
+  inSession ? inSessionLayout({ token }) : <Login />;
 
 export interface IProps {
   inSession: boolean;
@@ -71,6 +40,7 @@ export interface IProps {
 
 export const mapStateToProps = (state: any): IProps => ({
   inSession: state.getIn(['session', 'token']) !== '',
+  token: state.getIn(['session', 'token']),
 });
 
 export const mapDispatchToProps = dispatch => ({
