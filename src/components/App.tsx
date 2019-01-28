@@ -6,6 +6,7 @@ import React from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { connect } from 'react-redux';
 import fetch from 'node-fetch';
+import base64 from 'base-64';
 
 jsx;
 
@@ -73,17 +74,31 @@ export const mapStateToProps = (state: any): IProps => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  getSession: () =>
-    dispatch({
-      payload: {
-        token: 'JustAnExampleToken',
-        username: 'Mr. Example',
-      },
-      type: 'RECEIVE_SESSION',
-    }),
+  getSession: () => {
+    const headers = new Headers(
+      {
+        'Authorization': 'Basic ' + base64.encode('example1:example1')
+      }
+    );
+    fetch('/protected/route/basic', {
+      method: 'GET',
+      headers,
+      mode: 'no-cors',
+    })
+    .then(res => res.json())
+    .then(res => {
+      dispatch({
+        payload: {
+          token: res.teameToken,
+          username: 'example1',
+        },
+        type: 'RECEIVE_SESSION',
+      });
+    });
+  },
   getGraphQL: () => {
     const query = '{ users { password }}';
-    fetch('http://localhost:8080/graphql', {
+    fetch('/graphql', {
       method: 'POST',
       body: JSON.stringify({ query }),
       // ContentType: 'application/json',
