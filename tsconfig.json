@@ -9,9 +9,6 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "typings": [
-        "src/typings.d.ts"
-      ],
       "actions/*": [
         "src/actions/*"
       ],
@@ -26,6 +23,9 @@
       ],
       "reducers/*": [
         "src/reducers/*"
+      ],
+      "types": [
+        "src/types.d.ts"
       ]
     },
     "plugins": [

@@ -1,15 +1,15 @@
 /** @jsx jsx */
-import 'typings';
+import T from 'types';
 import { jsx } from '@emotion/core';
 import IconButton from 'components/buttons/IconButton';
-import React from 'react';
+import * as React from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { connect } from 'react-redux';
 import request from 'superagent';
 
 jsx;
 
-class Login extends React.Component<ILoginProps, ILoginState> {
+class Login extends React.Component<T.ILoginProps, T.ILoginState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -21,7 +21,7 @@ class Login extends React.Component<ILoginProps, ILoginState> {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  public render() {
+  public render(): React.ReactNode {
     return (
       <div
         css={{
@@ -62,27 +62,25 @@ class Login extends React.Component<ILoginProps, ILoginState> {
     );
   }
 
-  private handleSetUsername(event) {
+  private handleSetUsername(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       username: event.target.value,
     });
   }
 
-  private handleSetPassword(event) {
+  private handleSetPassword(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       password: event.target.value,
     });
   }
 
-  private handleSubmit(event) {
+  private handleSubmit(event: React.FormEvent<HTMLInputElement>): void {
     event.preventDefault();
     this.props.getSession(this.state.username, this.state.password);
   }
 }
 
-export const mapStateToProps = (state: any): any => ({});
-
-export const mapDispatchToProps = (dispatch): ILoginDispatchToProps => ({
+export const mapDispatchToProps = (dispatch): T.ILoginDispatchToProps => ({
   getSession: (username, password) => {
     request
       .get('/login')
@@ -107,6 +105,6 @@ export const mapDispatchToProps = (dispatch): ILoginDispatchToProps => ({
 });
 
 export default connect(
-  mapStateToProps,
+  undefined,
   mapDispatchToProps
 )(Login);

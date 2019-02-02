@@ -26,12 +26,12 @@ module.exports = {
   },
   resolve: {
     alias: {
-      typings: `${src}/typings.d.ts`,
       actions: `${src}/components`,
       components: `${src}/components`,
       containers: `${src}/containers`,
       dist,
       reducers: `${src}/reducers`,
+      types: `${src}/types.d.ts`,
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     modules: ['node_modules'],
