@@ -1,4 +1,4 @@
-import App from 'components/App';
+import App from 'containers/App';
 import { Map } from 'immutable';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
