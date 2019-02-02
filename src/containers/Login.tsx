@@ -14,7 +14,7 @@ const Login = class Login extends React.Component {
     super();
     this.state = {
       username: 'example1',
-      password: 'example1',
+      password: 'Not set',
     };
     this.handleSetUsername = this.handleSetUsername.bind(this);
     this.handleSetPassword = this.handleSetPassword.bind(this);
@@ -95,11 +95,11 @@ export const mapDispatchToProps = (dispatch): ILogin => ({
           !err &&
           res.status === 200 &&
           res.body &&
-          typeof res.body.token === 'string'
+          typeof res.body.teameToken === 'string'
         ) {
           dispatch({
             payload: {
-              token: res.body.token,
+              token: res.body.teameToken,
               username,
             },
             type: 'RECEIVE_SESSION',

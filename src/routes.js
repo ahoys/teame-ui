@@ -24,7 +24,7 @@ const handleFailedRequest = (responseForClient, backendError) => {
       );
       wls.log(backendError.response.error);
     }
-  } catch {
+  } catch (e) {
     return;
   }
 }
@@ -47,7 +47,7 @@ const handleSuccessfulRequest = (method, responseForClient, backendResponse) => 
         .status(200)
         .send();
     }
-  } catch {
+  } catch (e) {
     return;
   }
 }
@@ -62,7 +62,7 @@ const all = (clientRequest, responseForClient, next) => {
   try {
     ls.print(clientRequest.method, clientRequest.url)
     next();
-  } catch {
+  } catch (e) {
     next();
   }
 }
@@ -89,6 +89,26 @@ const login = (clientRequest, responseForClient) => {
     });
 };
 
+const graphql = (clientRequest, responseForClient) => {
+  console.log(Object.keys(clientRequest));
+  request
+    .post('http://localhost:8080/graphql')
+    .set('Content-Type', 'application/json')
+    .set('Accept', 'application/json')
+    .send(clientRequest.body)
+    .end((backendError, backendResponse) => {
+      if (backendError) {
+        handleFailedRequest(responseForClient, backendError);
+      } else {
+        handleSuccessfulRequest(
+          backendResponse.req.method,
+          responseForClient,
+          backendResponse
+        );
+      }
+    });
+}
+
 /**
  * Lists and maps all routes available for the client.
  * @param {object} server - An Express.js server.
@@ -101,6 +121,8 @@ const setRoutesForServer = (server) => {
   }
   server.get('/login', (clientRequest, responseForClient) =>
     login(clientRequest, responseForClient));
+  server.post('/graphql', (clientRequest, responseForClient) =>
+    graphql(clientRequest, responseForClient));
 };
 
 module.exports = setRoutesForServer;
