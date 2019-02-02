@@ -45,6 +45,7 @@ export default ({ clientStats }) => (req, res, next) => {
         <meta name="description" content="UI for Teame">
         <meta name="author" content="Ari Höysniemi">
         <style type="text/css">html,body{margin:0;padding:0;}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" />
       </head>
       <body>
         <div id="client">${client}</div>

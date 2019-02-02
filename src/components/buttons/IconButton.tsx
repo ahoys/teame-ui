@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import React from 'react';
-import Icon from 'react-icons';
 
 jsx;
 
@@ -18,6 +17,6 @@ export default ({ icon, str, handleClick }) => (
     onClick={handleClick}
   >
     {React.createElement(icon)}
-    <span>{str}</span>
+    <p>{str}</p>
   </div>
 );

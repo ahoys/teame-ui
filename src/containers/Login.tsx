@@ -28,7 +28,6 @@ class Login extends React.Component<T.ILoginProps, T.ILoginState> {
           alignItems: 'center',
           display: 'flex',
           flexDirection: 'column',
-          fontSize: '1rem',
           height: '100vh',
           justifyContent: 'center',
           svg: {
@@ -38,8 +37,26 @@ class Login extends React.Component<T.ILoginProps, T.ILoginState> {
             margin: '8px',
           },
           width: '100vw',
+          h1: {
+            fontSize: '2rem',
+          },
+          '.header': {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            margin: '1rem',
+            marginBottom: '8vh',
+          },
+          '.info': {
+            margin: '1rem',
+          },
         }}
       >
+        <div className="header">
+          <h1>Welcome to Teame</h1>
+          <p>The Greatest team management service ever.</p>
+        </div>
         <form
           css={{
             display: 'flex',
@@ -65,9 +82,9 @@ class Login extends React.Component<T.ILoginProps, T.ILoginState> {
           />
         </form>
         {this.props.isRequestingSession ? (
-          <p>Loading...</p>
+          <p className="info">Loading...</p>
         ) : (
-          <p>Please log in.</p>
+          <p className="info">Please log in.</p>
         )}
       </div>
     );
