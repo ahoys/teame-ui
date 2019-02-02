@@ -1,7 +1,7 @@
 /** @jsx jsx */
+import 'typings';
 import { jsx } from '@emotion/core';
 import IconButton from 'components/buttons/IconButton';
-import TextInput from 'components/inputs/TextInput';
 import React from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { connect } from 'react-redux';
@@ -9,9 +9,9 @@ import request from 'superagent';
 
 jsx;
 
-const Login = class Login extends React.Component {
-  constructor() {
-    super();
+class Login extends React.Component<ILoginProps, ILoginState> {
+  constructor(props: any) {
+    super(props);
     this.state = {
       username: 'example1',
       password: 'Not set',
@@ -21,27 +21,7 @@ const Login = class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSetUsername(event) {
-    this.setState({
-      username: event.target.value,
-    });
-  };
-
-  handleSetPassword(event) {
-    this.setState({
-      password: event.target.value,
-    });
-  };
-
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.getSession(
-      this.state.username,
-      this.state.password,
-    )
-  }
-
-  render() {
+  public render() {
     return (
       <div
         css={{
@@ -72,20 +52,37 @@ const Login = class Login extends React.Component {
             value={this.state.password}
             onChange={this.handleSetPassword}
           />
-          <IconButton icon={FiLogIn} str="Login" handleClick={this.handleSubmit} />
+          <IconButton
+            icon={FiLogIn}
+            str="Login"
+            handleClick={this.handleSubmit}
+          />
         </form>
       </div>
     );
   }
-};
 
-export interface ILogin {
-  getSession: (username: string, password: string) => void;
+  private handleSetUsername(event) {
+    this.setState({
+      username: event.target.value,
+    });
+  }
+
+  private handleSetPassword(event) {
+    this.setState({
+      password: event.target.value,
+    });
+  }
+
+  private handleSubmit(event) {
+    event.preventDefault();
+    this.props.getSession(this.state.username, this.state.password);
+  }
 }
 
 export const mapStateToProps = (state: any): any => ({});
 
-export const mapDispatchToProps = (dispatch): ILogin => ({
+export const mapDispatchToProps = (dispatch): ILoginDispatchToProps => ({
   getSession: (username, password) => {
     request
       .get('/login')

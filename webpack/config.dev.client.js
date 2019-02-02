@@ -23,6 +23,7 @@ module.exports = {
   },
   resolve: {
     alias: {
+      typings: `${src}/typings.d.ts`,
       actions: `${src}/components`,
       components: `${src}/components`,
       containers: `${src}/containers`,
