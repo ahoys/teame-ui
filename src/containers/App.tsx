@@ -9,20 +9,20 @@ jsx;
 export const inSessionLayout = ({ token }) => (
   <div
     css={{
-      alignItems: 'center',
       display: 'flex',
       flexDirection: 'column',
-      fontSize: '1rem',
-      height: '100vh',
       justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
+      width: '100vw',
       svg: {
         marginLeft: '8px',
       },
-      width: '100vw',
     }}
   >
     <p>You just used Redux-stores! That's cool peanuts.</p>
     <p>Your token is {token}</p>
+    <img src="https://media.giphy.com/media/3kzJvEciJa94SMW3hN/giphy.gif" />
   </div>
 );
 

@@ -5,7 +5,7 @@ import IconButton from 'components/buttons/IconButton';
 import * as React from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { connect } from 'react-redux';
-import request from 'superagent';
+import { requestSession } from 'actions/action.session';
 
 jsx;
 
@@ -27,6 +27,7 @@ class Login extends React.Component<T.ILoginProps, T.ILoginState> {
         css={{
           alignItems: 'center',
           display: 'flex',
+          flexDirection: 'column',
           fontSize: '1rem',
           height: '100vh',
           justifyContent: 'center',
@@ -39,7 +40,12 @@ class Login extends React.Component<T.ILoginProps, T.ILoginState> {
           width: '100vw',
         }}
       >
-        <form>
+        <form
+          css={{
+            display: 'flex',
+            flexDirection: 'row',
+          }}
+        >
           <input
             type="text"
             placeholder="Username"
@@ -58,6 +64,11 @@ class Login extends React.Component<T.ILoginProps, T.ILoginState> {
             handleClick={this.handleSubmit}
           />
         </form>
+        {this.props.isRequestingSession ? (
+          <p>Loading...</p>
+        ) : (
+          <p>Please log in.</p>
+        )}
       </div>
     );
   }
@@ -76,35 +87,14 @@ class Login extends React.Component<T.ILoginProps, T.ILoginState> {
 
   private handleSubmit(event: React.FormEvent<HTMLInputElement>): void {
     event.preventDefault();
-    this.props.getSession(this.state.username, this.state.password);
+    this.props.dispatch(
+      requestSession(this.state.username, this.state.password)
+    );
   }
 }
 
-export const mapDispatchToProps = (dispatch): T.ILoginDispatchToProps => ({
-  getSession: (username, password) => {
-    request
-      .get('/login')
-      .auth(username, password)
-      .end((err, res) => {
-        if (
-          !err &&
-          res.status === 200 &&
-          res.body &&
-          typeof res.body.teameToken === 'string'
-        ) {
-          dispatch({
-            payload: {
-              token: res.body.teameToken,
-              username,
-            },
-            type: 'RECEIVE_SESSION',
-          });
-        }
-      });
-  },
+export const mapStateToProps = (state: any): T.ILoginStateToProps => ({
+  isRequestingSession: state.getIn(['session', 'isRequestingSession']),
 });
 
-export default connect(
-  undefined,
-  mapDispatchToProps
-)(Login);
+export default connect(mapStateToProps)(Login);

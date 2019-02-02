@@ -2,12 +2,13 @@
  * All typings can be found from here.
  * import { types-you-want } from 'typings';
  */
-export interface ILoginDispatchToProps {
-  getSession: (username: string, password: string) => void;
+export interface ILoginStateToProps {
+  isRequestingSession: boolean;
 }
 
-export interface ILoginProps extends ILoginDispatchToProps {
+export interface ILoginProps extends ILoginStateToProps {
   handleSubmit(event: any): string;
+  dispatch(creator: any): void;
 }
 
 export interface ILoginState {

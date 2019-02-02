@@ -24,7 +24,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      actions: `${src}/components`,
+      actions: `${src}/actions`,
       components: `${src}/components`,
       containers: `${src}/containers`,
       dist,

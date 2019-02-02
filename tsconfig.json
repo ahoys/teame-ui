@@ -8,6 +8,7 @@
     "jsx": "react",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
+    "types": ["node"],
     "paths": {
       "actions/*": [
         "src/actions/*"

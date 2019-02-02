@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const StatsPlugin = require('stats-webpack-plugin')
 const root = path.resolve(__dirname, '../')
@@ -28,7 +29,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      actions: `${src}/components`,
+      actions: `${src}/actions`,
       components: `${src}/components`,
       containers: `${src}/containers`,
       dist,
@@ -43,6 +44,10 @@ module.exports = {
     new CleanWebpackPlugin([dist], { root }),
     // Creates stats for code splitting.
     new StatsPlugin('stats.json'),
+    // Define globals.
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    }),
   ],
   optimization: {
     splitChunks: {
