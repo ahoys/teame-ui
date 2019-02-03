@@ -4,16 +4,20 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import session from './reducer.session';
 
-const middlewares = [thunkMiddleware];
-if (process.env.NODE_ENV === 'development') {
-  middlewares.push(createLogger());
-}
-
 export default initialState => {
   const rootReducer = combineReducers({ session });
   return createStore(
     rootReducer,
     initialState,
-    applyMiddleware(...middlewares)
+    process.env.NODE_ENV === 'development'
+      ? applyMiddleware(
+          thunkMiddleware,
+          createLogger({
+            // This is needed to parse Immutable stores.
+            collapsed: true,
+            stateTransformer: state => state.toJS(),
+          })
+        )
+      : applyMiddleware(thunkMiddleware)
   );
 };
