@@ -55,7 +55,7 @@ class Dashboard extends React.Component<T.IDashboardProps, T.IDashboardState> {
           },
         }}
       >
-        <h1>Your face after you realize you've been living a lie.</h1>
+        <h1>Your face as Teame is still unfinished.</h1>
         <img src="https://media.giphy.com/media/3kzJvEciJa94SMW3hN/giphy.gif" />
         <p>Your token is {this.props.token}</p>
         {this.state.isLoading ? <p>Loading users...</p> : <p>{users}</p>}
