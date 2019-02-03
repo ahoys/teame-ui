@@ -4,7 +4,8 @@ import { jsx } from '@emotion/core';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import request from 'superagent';
-import { requestSession } from 'actions/action.session';
+import IconButton from 'components/buttons/IconButton';
+import { FiPlus } from 'react-icons/fi';
 
 jsx;
 
@@ -15,7 +16,11 @@ class Dashboard extends React.Component<T.IDashboardProps, T.IDashboardState> {
       isLoading: true,
       hasFailed: false,
       users: [],
+      newUsername: '',
     };
+    this.handleNewUsername = this.handleNewUsername.bind(this);
+    this.handleSubmitNewUser = this.handleSubmitNewUser.bind(this);
+    this.getUsers = this.getUsers.bind(this);
   }
 
   public render(): React.ReactNode {
@@ -54,11 +59,31 @@ class Dashboard extends React.Component<T.IDashboardProps, T.IDashboardState> {
         <img src="https://media.giphy.com/media/3kzJvEciJa94SMW3hN/giphy.gif" />
         <p>Your token is {this.props.token}</p>
         {this.state.isLoading ? <p>Loading users...</p> : <p>{users}</p>}
+        <br />
+        <h1>Add new user</h1>
+        <br />
+        <input
+          type="text"
+          placeholder="Username"
+          value={this.state.newUsername}
+          onChange={this.handleNewUsername}
+          autoComplete="on"
+        />
+        <br />
+        <IconButton
+          icon={FiPlus}
+          str="Save"
+          handleClick={this.handleSubmitNewUser}
+        />
       </div>
     );
   }
 
   public componentDidMount() {
+    this.getUsers();
+  }
+
+  private getUsers(): void {
     request
       .post('/graphql')
       .set('Content-Type', 'text/plain')
@@ -73,7 +98,34 @@ class Dashboard extends React.Component<T.IDashboardProps, T.IDashboardState> {
           this.setState({
             users: res.body.data.users,
             isLoading: false,
+            newUsername: '',
           });
+        }
+      });
+  }
+
+  private handleNewUsername(e): void {
+    this.setState({
+      newUsername: e.target.value,
+    });
+  }
+
+  private handleSubmitNewUser(): void {
+    request
+      .post('/graphql')
+      .set('Content-Type', 'text/plain')
+      .set('token', this.props.token)
+      .send(
+        `mutation {createUser(username: "${this.state.newUsername}"){username}}`
+      )
+      .end((err, res) => {
+        if (err) {
+          this.setState({
+            hasFailed: true,
+            newUsername: '',
+          });
+        } else {
+          this.getUsers();
         }
       });
   }

@@ -36,7 +36,7 @@ export const App = ({ inSession }) => (
   >
     <Global
       styles={{
-        'p, h1, h2, h3': {
+        'p, h1, h2, h3, svg': {
           fontFamily: 'Open Sans, sans-serif',
           fontWeight: 300,
           fontSize: '1rem',

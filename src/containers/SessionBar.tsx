@@ -48,6 +48,7 @@ class SessionBar extends React.Component<T.ISessionBarProps, {}> {
             svg: {
               width: '16px',
               height: '16px',
+              color: 'black',
             },
           }}
           onClick={this.handleSignOut}

@@ -29,6 +29,7 @@ export interface IDashboardState {
   isLoading: boolean;
   hasFailed: boolean;
   users: Array<{ username: string }>;
+  newUsername: string;
 }
 
 export interface ISessionBarStateToProps {
