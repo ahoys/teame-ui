@@ -8,8 +8,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress --config webpack/config.prod.client.js && webpack --progress --config webpack/config.prod.server.js",
     "start": "cross-env NODE_ENV=development node src/server.dev.js",
-    "lint": "./node_modules/.bin/tslint --project ./ ./src/**",
-    "lint:fix": "./node_modules/.bin/tslint --project ./ --fix ./src/**"
+    "lint": "./node_modules/.bin/tslint --project ./ --fix ./src/**"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.0",

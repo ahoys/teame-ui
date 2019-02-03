@@ -13,19 +13,6 @@ const setRoutesForServer = require('./routes');
 const server = express()
 setRoutesForServer(server);
 
-// server.post('/graphql', (req, res) => {
-//   const query = '{ users { password }}';
-//   fetch('http://localhost:8080/graphql', {
-//     method: 'POST',
-//     body: query,
-//     mode: 'no-cors',
-//   })
-//   .then(backRes => backRes.json())
-//   .then((backRes) => {
-//     res.send(backRes);
-//   });
-// })
-
 server.use(
   webpackDevMiddleware(compiler, {
     serverSideRender: true,
