@@ -2,6 +2,7 @@
 import { jsx, Global } from '@emotion/core';
 import Login from 'containers/Login';
 import Dashboard from 'containers/Dashboard';
+import SessionBar from 'containers/SessionBar';
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -10,6 +11,11 @@ jsx;
 export const App = ({ inSession }) => (
   <div
     css={{
+      display: 'flex',
+      flexDirection: 'row',
+      width: '100vw',
+      height: '100vh',
+      overflow: 'hidden',
       background: 'linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB)',
       backgroundSize: '400%',
       WebkitAnimation: 'Gradient 15s ease infinite',
@@ -52,6 +58,7 @@ export const App = ({ inSession }) => (
         },
       }}
     />
+    <SessionBar />
     {inSession ? <Dashboard /> : <Login />}
   </div>
 );

@@ -51,6 +51,15 @@ class Login extends React.Component<T.ILoginProps, T.ILoginState> {
           '.info': {
             margin: '1rem',
           },
+          animation: 'Opacity 1s ease',
+          '@keyframes Opacity': {
+            '0%': {
+              opacity: 0,
+            },
+            '100%': {
+              opacity: 1,
+            },
+          },
         }}
       >
         <div className="header">
@@ -68,12 +77,14 @@ class Login extends React.Component<T.ILoginProps, T.ILoginState> {
             placeholder="Username"
             value={this.state.username}
             onChange={this.handleSetUsername}
+            autoComplete="on"
           />
           <input
             type="password"
             placeholder="Password"
             value={this.state.password}
             onChange={this.handleSetPassword}
+            autoComplete="on"
           />
           <IconButton
             icon={FiLogIn}

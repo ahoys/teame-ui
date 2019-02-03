@@ -30,3 +30,10 @@ export interface IDashboardState {
   hasFailed: boolean;
   users: Array<{ username: string }>;
 }
+
+export interface ISessionBarStateToProps {
+  hasToken: boolean;
+}
+export interface ISessionBarProps extends ISessionBarStateToProps {
+  dispatch(creator: any): void;
+}

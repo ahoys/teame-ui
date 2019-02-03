@@ -29,3 +29,12 @@ export const receiveSession = (username: string, token: string) => ({
   },
   type: 'RECEIVE_SESSION',
 });
+
+export const abandonSession = () => {
+  return dispatch => {
+    dispatch({
+      payload: {},
+      type: 'ABANDON_SESSION',
+    });
+  };
+};

@@ -29,13 +29,24 @@ class Dashboard extends React.Component<T.IDashboardProps, T.IDashboardState> {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          height: '100vh',
-          width: '100vw',
+          flex: '1 1 128px',
+          overflowY: 'auto',
+          background: '#1f2227',
+          marginLeft: '48px', // SessionBar
           svg: {
             marginLeft: '8px',
           },
           img: {
             margin: '16px',
+          },
+          animation: 'Opacity 1s ease',
+          '@keyframes Opacity': {
+            '0%': {
+              opacity: 0,
+            },
+            '100%': {
+              opacity: 1,
+            },
           },
         }}
       >

@@ -10,6 +10,7 @@ export default ({ icon, str, handleClick }) => (
       alignItems: 'center',
       display: 'flex',
       flexDirection: 'row',
+      cursor: 'pointer',
       svg: {
         marginRight: '8px',
       },
