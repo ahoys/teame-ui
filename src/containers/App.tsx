@@ -1,35 +1,13 @@
 /** @jsx jsx */
 import { jsx, Global } from '@emotion/core';
 import Login from 'containers/Login';
+import Dashboard from 'containers/Dashboard';
 import React from 'react';
 import { connect } from 'react-redux';
 
 jsx;
 
-export const inSessionLayout = ({ token }) => (
-  <div
-    css={{
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100vh',
-      width: '100vw',
-      svg: {
-        marginLeft: '8px',
-      },
-      img: {
-        margin: '16px',
-      },
-    }}
-  >
-    <h1>Your face after you realize you've been living a lie.</h1>
-    <img src="https://media.giphy.com/media/3kzJvEciJa94SMW3hN/giphy.gif" />
-    <p>Your token is {token}</p>
-  </div>
-);
-
-export const App = ({ inSession, token }) => (
+export const App = ({ inSession }) => (
   <div
     css={{
       background: 'linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB)',
@@ -74,7 +52,7 @@ export const App = ({ inSession, token }) => (
         },
       }}
     />
-    {inSession ? inSessionLayout({ token }) : <Login />}
+    {inSession ? <Dashboard /> : <Login />}
   </div>
 );
 

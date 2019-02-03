@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.4",
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "immutable": "^4.0.0-rc.12",
     "logscribe": "^2.0.2",

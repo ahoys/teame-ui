@@ -20,3 +20,13 @@ export interface ILoginState {
   username: string;
   password: string;
 }
+
+export interface IDashboardProps {
+  token: string;
+}
+
+export interface IDashboardState {
+  isLoading: boolean;
+  hasFailed: boolean;
+  users: Array<{ username: string }>;
+}

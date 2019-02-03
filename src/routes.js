@@ -1,6 +1,7 @@
 const request = require('superagent');
 const ls = require('logscribe').default('routes', '\x1b[32m');
 const wls = require('logscribe').default('routes', '\x1b[31m');
+const bodyParser = require('body-parser');
 
 /**
  * Logs communication errors for
@@ -41,6 +42,11 @@ const handleSuccessfulRequest = (method, responseForClient, backendResponse) => 
       responseForClient
         .status(200)
         .send(backendResponse.body);
+    } else if (method === 'POST') {
+      // GraphQL requests have a body attached to them.
+      responseForClient
+        .status(200)
+        .send(JSON.parse(backendResponse.text));
     } else {
       // Other methods only return OK.
       responseForClient
@@ -60,7 +66,11 @@ const handleSuccessfulRequest = (method, responseForClient, backendResponse) => 
  */
 const all = (clientRequest, responseForClient, next) => {
   try {
-    ls.print(clientRequest.method, clientRequest.url)
+    if (clientRequest.method === 'POST') {
+      ls.print(clientRequest.method, clientRequest.url, clientRequest.body)
+    } else {
+      ls.print(clientRequest.method, clientRequest.url)
+    }
     next();
   } catch (e) {
     next();
@@ -90,11 +100,11 @@ const login = (clientRequest, responseForClient) => {
 };
 
 const graphql = (clientRequest, responseForClient) => {
-  console.log(Object.keys(clientRequest));
   request
     .post('http://localhost:8080/graphql')
-    .set('Content-Type', 'application/json')
-    .set('Accept', 'application/json')
+    .set('Content-Type', 'text/plain; charset=UTF-8')
+    .accept('text/plain; charset=UTF-8')
+    .set('teameToken', clientRequest.headers.token)
     .send(clientRequest.body)
     .end((backendError, backendResponse) => {
       if (backendError) {
@@ -114,9 +124,15 @@ const graphql = (clientRequest, responseForClient) => {
  * @param {object} server - An Express.js server.
  */
 const setRoutesForServer = (server) => {
+  // Parse application/json.
+  server.use(bodyParser.text({
+    type: 'text/plain'
+  }));
   if (process.env.NODE_ENV === 'development') {
     // Development helper middleware(s).
     server.get('*', (clientRequest, responseForClient, next) =>
+      all(clientRequest, responseForClient, next));
+    server.post('*', (clientRequest, responseForClient, next) =>
       all(clientRequest, responseForClient, next));
   }
   server.get('/login', (clientRequest, responseForClient) =>
