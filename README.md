@@ -10,9 +10,6 @@ A small proto UI for Teame backend.
 ### Installation
 1. Clone this repository (git clone https://github.com/ahoys/teame-ui.git).
 2. Run command "yarn" for the directory. This will install the dependencies.
-3. To start developing, read commands below. Enjoy.
-
-Done.
 
 ### Commands
 - "yarn start": starts a development server.
