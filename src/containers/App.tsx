@@ -12,8 +12,8 @@ export const App = ({ inSession }) => (
     css={{
       background: 'linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB)',
       backgroundSize: '400%',
-      '-webkit-animation': 'Gradient 15s ease infinite',
-      '-moz-animation': 'Gradient 15s ease infinite',
+      WebkitAnimation: 'Gradient 15s ease infinite',
+      MozAnimation: 'Gradient 15s ease infinite',
       animation: 'Gradient 15s ease infinite',
       '@keyframes Gradient': {
         '0%': {
