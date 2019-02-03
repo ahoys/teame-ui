@@ -7,6 +7,10 @@ A small proto UI for Teame backend.
 - [Visual Studio Code](https://code.visualstudio.com/download)
 - Recommended VS code extensions: TypeScript TSLint Plugin.
 
+**Note: Teame backend should be up & running before continuing.**
+
+[Teame backend](https://github.com/teemuki8/teame)
+
 ### Installation
 1. Clone this repository (git clone https://github.com/ahoys/teame-ui.git).
 2. Run command "yarn" for the directory. This will install the dependencies.
