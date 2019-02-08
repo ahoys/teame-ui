@@ -29,10 +29,11 @@ export interface IThemeContext {
     [key: string]: {
       [key: string]: string | number;
     };
-  }
+  };
 }
 
 export interface ISessionContext {
   username: string;
   token: string;
+  requestSession: (username: string, token: string, cb: (username: string, token: string) => void) => void;
 }
