@@ -21,7 +21,7 @@ const App = () => (
               width: '100vw',
               height: '100vh',
               overflow: 'hidden',
-              background: theme.background,
+              background: theme.bodyColor,
               backgroundSize: '400%',
               WebkitAnimation: 'Gradient 15s ease infinite',
               MozAnimation: 'Gradient 15s ease infinite',

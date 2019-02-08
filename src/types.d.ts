@@ -41,7 +41,15 @@ export interface ISessionBarProps extends ISessionBarStateToProps {
 }
 
 export interface IThemeContext {
-  background: string;
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+  bodyColor: string;
+  global: {
+    [key: string]: {
+      [key: string]: string | number;
+    };
+  }
 }
 
 export interface ISessionContext {
