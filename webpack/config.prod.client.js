@@ -32,6 +32,7 @@ module.exports = {
       actions: `${src}/actions`,
       components: `${src}/components`,
       containers: `${src}/containers`,
+      context: `${src}/context`,
       dist,
       reducers: `${src}/reducers`,
       types: `${src}/types.d.ts`,

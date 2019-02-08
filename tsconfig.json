@@ -19,6 +19,9 @@
       "containers/*": [
         "src/containers/*"
       ],
+      "context/*": [
+        "src/context/*"
+      ],
       "dist/*": [
         "dist/*"
       ],

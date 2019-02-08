@@ -40,11 +40,11 @@ export interface ISessionBarProps extends ISessionBarStateToProps {
   dispatch(creator: any): void;
 }
 
-export interface ITheme {
+export interface IThemeContext {
   background: string;
 }
 
-export interface ISession {
+export interface ISessionContext {
   username: string;
   token: string;
 }

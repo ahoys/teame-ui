@@ -4,8 +4,8 @@ import Login from 'containers/Login';
 import Dashboard from 'containers/Dashboard';
 import SessionBar from 'containers/SessionBar';
 import React from 'react';
-import { ThemeContext } from '../context/theme.context';
-import { SessionContext } from '../context/session.context';
+import { ThemeContext } from 'context/theme.context';
+import { SessionContext } from 'context/session.context';
 
 jsx;
 
