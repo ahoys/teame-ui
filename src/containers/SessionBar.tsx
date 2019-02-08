@@ -1,26 +1,19 @@
 /** @jsx jsx */
-import T from 'types';
 import { jsx } from '@emotion/core';
 import * as React from 'react';
 import { FiLogOut } from 'react-icons/fi';
-import { connect } from 'react-redux';
-import { abandonSession } from 'actions/action.session';
+import { SessionContext } from 'contexts/session.context';
 
 jsx;
 
-class SessionBar extends React.Component<T.ISessionBarProps, {}> {
-  constructor(props: any) {
+class SessionBar extends React.Component<{}, {}> {
+  constructor(props: {}) {
     super(props);
-    this.state = {
-      isLoading: true,
-      hasFailed: false,
-      users: [],
-    };
     this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   public render(): React.ReactNode {
-    return this.props.hasToken ? (
+    return this.context.token !== '' ? (
       <div
         css={{
           position: 'absolute',
@@ -60,12 +53,10 @@ class SessionBar extends React.Component<T.ISessionBarProps, {}> {
   }
 
   private handleSignOut(): void {
-    this.props.dispatch(abandonSession());
+    console.log('e');
   }
 }
 
-export const mapStateToProps = (state: any): T.ISessionBarStateToProps => ({
-  hasToken: state.getIn(['session', 'token']) !== '',
-});
+SessionBar.contextType = SessionContext;
 
-export default connect(mapStateToProps)(SessionBar);
+export default SessionBar;

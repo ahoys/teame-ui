@@ -4,17 +4,17 @@ import { jsx } from '@emotion/core';
 import IconButton from 'components/buttons/IconButton';
 import * as React from 'react';
 import { FiLogIn } from 'react-icons/fi';
-import { connect } from 'react-redux';
-import { requestSession } from 'actions/action.session';
+import { SessionContext } from 'contexts/session.context';
 
 jsx;
 
-class Login extends React.Component<T.ILoginProps, T.ILoginState> {
-  constructor(props: any) {
+class Login extends React.Component<{}, T.ILoginState> {
+  constructor(props: {}) {
     super(props);
     this.state = {
       username: 'example1',
       password: 'Not set',
+      isRequestingSession: false,
     };
     this.handleSetUsername = this.handleSetUsername.bind(this);
     this.handleSetPassword = this.handleSetPassword.bind(this);
@@ -92,7 +92,7 @@ class Login extends React.Component<T.ILoginProps, T.ILoginState> {
             handleClick={this.handleSubmit}
           />
         </form>
-        {this.props.isRequestingSession ? (
+        {this.state.isRequestingSession ? (
           <p className="info">Loading...</p>
         ) : (
           <p className="info">Please log in.</p>
@@ -115,14 +115,10 @@ class Login extends React.Component<T.ILoginProps, T.ILoginState> {
 
   private handleSubmit(event: React.FormEvent<HTMLInputElement>): void {
     event.preventDefault();
-    this.props.dispatch(
-      requestSession(this.state.username, this.state.password)
-    );
+    this.setState({
+      isRequestingSession: true,
+    });
   }
 }
 
-export const mapStateToProps = (state: any): T.ILoginStateToProps => ({
-  isRequestingSession: state.getIn(['session', 'isRequestingSession']),
-});
-
-export default connect(mapStateToProps)(Login);
+export default Login;

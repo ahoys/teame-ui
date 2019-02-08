@@ -26,12 +26,10 @@ module.exports = {
   },
   resolve: {
     alias: {
-      actions: `${src}/actions`,
       components: `${src}/components`,
       containers: `${src}/containers`,
       contexts: `${src}/contexts`,
       dist,
-      reducers: `${src}/reducers`,
       types: `${src}/types.d.ts`,
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],

@@ -2,15 +2,15 @@
 import T from 'types';
 import { jsx } from '@emotion/core';
 import * as React from 'react';
-import { connect } from 'react-redux';
 import request from 'superagent';
 import IconButton from 'components/buttons/IconButton';
 import { FiPlus } from 'react-icons/fi';
+import { SessionContext } from 'contexts/session.context';
 
 jsx;
 
-class Dashboard extends React.Component<T.IDashboardProps, T.IDashboardState> {
-  constructor(props: any) {
+class Dashboard extends React.Component<{}, T.IDashboardState> {
+  constructor(props: {}) {
     super(props);
     this.state = {
       isLoading: true,
@@ -57,7 +57,7 @@ class Dashboard extends React.Component<T.IDashboardProps, T.IDashboardState> {
       >
         <h1>Your face as Teame is still unfinished.</h1>
         <img src="https://media.giphy.com/media/3kzJvEciJa94SMW3hN/giphy.gif" />
-        <p>Your token is {this.props.token}</p>
+        <p>Your token is {this.context.token}</p>
         {this.state.isLoading ? <p>Loading users...</p> : <p>{users}</p>}
         <br />
         <h1>Add new user</h1>
@@ -87,7 +87,7 @@ class Dashboard extends React.Component<T.IDashboardProps, T.IDashboardState> {
     request
       .post('/graphql')
       .set('Content-Type', 'text/plain')
-      .set('token', this.props.token)
+      .set('token', this.context.token)
       .send(`{users(username: ""){username}}`)
       .end((err, res) => {
         if (err) {
@@ -114,7 +114,7 @@ class Dashboard extends React.Component<T.IDashboardProps, T.IDashboardState> {
     request
       .post('/graphql')
       .set('Content-Type', 'text/plain')
-      .set('token', this.props.token)
+      .set('token', this.context.token)
       .send(
         `mutation {createUser(username: "${this.state.newUsername}"){username}}`
       )
@@ -131,8 +131,6 @@ class Dashboard extends React.Component<T.IDashboardProps, T.IDashboardState> {
   }
 }
 
-export const mapStateToProps = (state: any): T.IDashboardProps => ({
-  token: state.getIn(['session', 'token']),
-});
+Dashboard.contextType = SessionContext;
 
-export default connect(mapStateToProps)(Dashboard);
+export default Dashboard;
