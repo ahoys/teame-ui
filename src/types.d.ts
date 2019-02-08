@@ -35,6 +35,11 @@ export interface IDashboardState {
 export interface ISessionBarStateToProps {
   hasToken: boolean;
 }
+
 export interface ISessionBarProps extends ISessionBarStateToProps {
   dispatch(creator: any): void;
+}
+
+export interface theme {
+  background: string;
 }
