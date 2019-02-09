@@ -1,6 +1,8 @@
 import T from 'types';
 import request from 'superagent';
 import { createContext } from 'react';
+import logscribe from 'logscribe';
+const { logprint } = logscribe('session.context');
 
 export const session: T.ISessionContext = {
   username: '',
@@ -20,6 +22,7 @@ export const session: T.ISessionContext = {
         ) {
           callback(null, res.body.teameToken);
         } else {
+          logprint(err);
           callback(err, '');
         }
       });
