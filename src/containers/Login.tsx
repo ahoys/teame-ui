@@ -87,7 +87,7 @@ const Login = () => {
         />
         <IconButton icon={FiLogIn} str="Login" handleClick={handleSubmit} />
       </form>
-      {session.isSigningIn ? (
+      {session.isCreating ? (
         <p className="info">Loading...</p>
       ) : (
         <p className="info">Please log in.</p>

@@ -24,7 +24,20 @@ const App = () => {
         background: theme.bodyColor,
       }}
     >
-      {session.token === '' ? <Login /> : <div>In</div>}
+      {session.token === '' ? (
+        <Login />
+      ) : (
+        <div>
+          <p>{session.token}</p>
+          <p>{session.username}</p>
+          <br />
+          <p>Teame is still heavily work in progress.</p>
+          <br />
+          <p onClick={session.remove} style={{ cursor: 'pointer' }}>
+            Sign out.
+          </p>
+        </div>
+      )}
     </div>
   );
 };

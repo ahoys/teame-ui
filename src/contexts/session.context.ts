@@ -34,8 +34,9 @@ export const login = (
 export const session: T.ISessionContext = {
   username: '',
   token: '',
-  isSigningIn: false,
-  createSession: null,
+  isCreating: false,
+  create: null,
+  remove: null,
 };
 
 export const SessionContext = createContext(session);

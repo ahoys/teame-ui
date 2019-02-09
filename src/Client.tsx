@@ -26,24 +26,39 @@ if (process.env.NODE_ENV === 'development') {
 const ContextProviders = () => {
   const [username, setUsername] = useState(session.username);
   const [token, setToken] = useState(session.token);
-  const [isSigningIn, setIsSigningIn] = useState(session.isSigningIn);
+  const [isCreating, setIsCreating] = useState(session.isCreating);
+  /**
+   * Create will initialize a new session. Meaning that based on the
+   * given credentials, a new token is requested from the back-end.
+   * @param submittedUsername - Username the client gave to us.
+   * @param submittedPassword - Password the client gave to us.
+   */
+  const create = (
+    submittedUsername: string,
+    submittedPassword: string
+  ): void => {
+    setIsCreating(true);
+    setUsername(submittedUsername);
+    login(submittedUsername, submittedPassword, (err, newToken) => {
+      setIsCreating(false);
+      if (!err) {
+        setToken(newToken);
+      }
+    });
+  };
+  const remove = (): void => {
+    setUsername('');
+    setToken('');
+  };
   return (
     <ThemeContext.Provider value={theme}>
       <SessionContext.Provider
         value={{
           username,
           token,
-          isSigningIn,
-          create: (newUsername: string, password: string) => {
-            setIsSigningIn(true);
-            setUsername(newUsername);
-            login(newUsername, password, (err, newToken) => {
-              setIsSigningIn(false);
-              if (!err) {
-                setToken(newToken);
-              }
-            });
-          },
+          isCreating,
+          create,
+          remove,
         }}
       >
         <Global styles={theme.global} />
