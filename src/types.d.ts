@@ -6,8 +6,11 @@ export interface ISessionContext {
   username: string;
   token: string;
   isSigningIn: boolean;
-  requestSession: (username: string, token: string) => void;
-  removeSession: () => void;
+  requestSession: (
+    username: string,
+    token: string,
+    callback: (error: any, token: string) => {},
+  ) => void;
 }
 
 export interface ILoginProps {
