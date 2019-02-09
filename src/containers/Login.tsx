@@ -19,7 +19,7 @@ const Login = () => {
     setPassword(evt.target.value);
   };
   const handleSubmit = () => {
-    session.createSession(username, password);
+    session.create(username, password);
   };
   return (
     <div

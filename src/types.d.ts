@@ -6,7 +6,7 @@ export interface ISessionContext {
   username: string;
   token: string;
   isSigningIn: boolean;
-  createSession: (username: string, password: string) => void;
+  create: (username: string, password: string) => void;
 }
 
 export interface ISessionBarProps {

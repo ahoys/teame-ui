@@ -34,7 +34,7 @@ const ContextProviders = () => {
           username,
           token,
           isSigningIn,
-          createSession: (newUsername: string, password: string) => {
+          create: (newUsername: string, password: string) => {
             setIsSigningIn(true);
             setUsername(newUsername);
             login(newUsername, password, (err, newToken) => {
