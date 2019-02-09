@@ -1,17 +1,12 @@
 /** @jsx jsx */
+import T from 'types';
 import { jsx } from '@emotion/core';
 import * as React from 'react';
 import { FiLogOut } from 'react-icons/fi';
-import { SessionContext } from 'contexts/session.context';
 
 jsx;
 
-class SessionBar extends React.Component<{}, {}> {
-  constructor(props: {}) {
-    super(props);
-    this.handleSignOut = this.handleSignOut.bind(this);
-  }
-
+class SessionBar extends React.Component<T.ISessionBarProps, {}> {
   public render(): React.ReactNode {
     return this.context.token !== '' ? (
       <div
@@ -44,19 +39,13 @@ class SessionBar extends React.Component<{}, {}> {
               color: 'black',
             },
           }}
-          onClick={this.handleSignOut}
+          onClick={this.props.handleSignOut}
         >
           {React.createElement(FiLogOut)}
         </div>
       </div>
     ) : null;
   }
-
-  private handleSignOut(): void {
-    this.context.removeSession();
-  }
 }
-
-SessionBar.contextType = SessionContext;
 
 export default SessionBar;

@@ -10,14 +10,22 @@ export interface ISessionContext {
   removeSession: () => void;
 }
 
-export interface ILoginState {
-  username: string;
-  password: string;
+export interface ILoginProps {
+  handleSignIn: (username: string, password: string) => void;
+  isSigningIn: boolean;
 }
 
 export interface ILoginState {
   username: string;
   password: string;
+}
+
+export interface ISessionBarProps {
+  handleSignOut: () => void;
+}
+
+export interface IDashboardProps {
+  token: string;
 }
 
 export interface IDashboardState {

@@ -4,12 +4,11 @@ import { jsx } from '@emotion/core';
 import IconButton from 'components/buttons/IconButton';
 import * as React from 'react';
 import { FiLogIn } from 'react-icons/fi';
-import { SessionContext } from 'contexts/session.context';
 
 jsx;
 
-class Login extends React.Component<{}, T.ILoginState> {
-  constructor(props: {}) {
+class Login extends React.Component<T.ILoginProps, T.ILoginState> {
+  constructor(props) {
     super(props);
     this.state = {
       username: 'example1',
@@ -91,7 +90,7 @@ class Login extends React.Component<{}, T.ILoginState> {
             handleClick={this.handleSubmit}
           />
         </form>
-        {this.context.isSigningIn ? (
+        {this.props.isSigningIn ? (
           <p className="info">Loading...</p>
         ) : (
           <p className="info">Please log in.</p>
@@ -114,10 +113,8 @@ class Login extends React.Component<{}, T.ILoginState> {
 
   private handleSubmit(event: React.FormEvent<HTMLInputElement>): void {
     event.preventDefault();
-    this.context.requestSession(this.state.username, this.state.password);
+    this.props.handleSignIn(this.state.username, this.state.password);
   }
 }
-
-Login.contextType = SessionContext;
 
 export default Login;
