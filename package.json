@@ -41,10 +41,10 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "logscribe": "^2.0.2",
-    "react": "16.x.x",
-    "react-dom": "^16.x.x",
-    "react-icons": "^3.x.x",
-    "react-universal-component": "^3.x.x",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-icons": "^3.3.0",
+    "react-universal-component": "^3.0.3",
     "superagent": "^4.1.0",
     "webpack-flush-chunks": "^2.0.3"
   }
