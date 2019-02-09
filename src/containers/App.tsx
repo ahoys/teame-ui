@@ -10,7 +10,7 @@ import request from 'superagent';
 
 jsx;
 
-const App2 = () => {
+const App = () => {
   const [token, setToken] = useState('');
   const [isSigningIn, setIsSigningIn] = useState(false);
   const handleSignIn = (username: string, password: string) => {
@@ -89,4 +89,4 @@ const App2 = () => {
   );
 };
 
-export default App2;
+export default App;
