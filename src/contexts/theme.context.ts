@@ -14,7 +14,7 @@ export const theme: T.IThemeContext = {
   // 10% of the palette.
   accentColor: '',
   // The main background color.
-  bodyColor: 'linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB)',
+  bodyColor: '#f7f7f7',
   // The global values affecting everything if not overridden.
   global: {
     // The base font settings.
@@ -24,7 +24,7 @@ export const theme: T.IThemeContext = {
       fontSize: '1rem',
       margin: 0,
       padding: 0,
-      color: 'white',
+      color: '#2b2b2b',
     },
     // Paragraphs.
     p: {
