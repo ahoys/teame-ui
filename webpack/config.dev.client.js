@@ -27,6 +27,7 @@ module.exports = {
       containers: `${src}/containers`,
       contexts: `${src}/contexts`,
       dist,
+      services: `${src}/services`,
       types: `${src}/types.d.ts`,
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],

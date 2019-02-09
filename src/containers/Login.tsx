@@ -14,7 +14,6 @@ class Login extends React.Component<{}, T.ILoginState> {
     this.state = {
       username: 'example1',
       password: 'Not set',
-      isRequestingSession: false,
     };
     this.handleSetUsername = this.handleSetUsername.bind(this);
     this.handleSetPassword = this.handleSetPassword.bind(this);
@@ -92,7 +91,7 @@ class Login extends React.Component<{}, T.ILoginState> {
             handleClick={this.handleSubmit}
           />
         </form>
-        {this.state.isRequestingSession ? (
+        {this.context.isSigningIn ? (
           <p className="info">Loading...</p>
         ) : (
           <p className="info">Please log in.</p>
@@ -115,10 +114,10 @@ class Login extends React.Component<{}, T.ILoginState> {
 
   private handleSubmit(event: React.FormEvent<HTMLInputElement>): void {
     event.preventDefault();
-    this.setState({
-      isRequestingSession: true,
-    });
+    this.context.requestSession(this.state.username, this.state.password);
   }
 }
+
+Login.contextType = SessionContext;
 
 export default Login;

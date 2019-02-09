@@ -22,6 +22,9 @@
       "dist/*": [
         "dist/*"
       ],
+      "services/*": [
+        "src/services/*"
+      ],
       "types": [
         "src/types.d.ts"
       ]

@@ -53,7 +53,7 @@ class SessionBar extends React.Component<{}, {}> {
   }
 
   private handleSignOut(): void {
-    console.log('e');
+    this.context.removeSession();
   }
 }
 

@@ -2,10 +2,17 @@
  * All typings can be found from here.
  * import { types-you-want } from 'typings';
  */
+export interface ISessionContext {
+  username: string;
+  token: string;
+  isSigningIn: boolean;
+  requestSession: (username: string, token: string) => void;
+  removeSession: () => void;
+}
+
 export interface ILoginState {
   username: string;
   password: string;
-  isRequestingSession: boolean;
 }
 
 export interface ILoginState {
@@ -30,10 +37,4 @@ export interface IThemeContext {
       [key: string]: string | number;
     };
   };
-}
-
-export interface ISessionContext {
-  username: string;
-  token: string;
-  requestSession: (username: string, token: string, cb: (username: string, token: string) => void) => void;
 }
